@@ -14,7 +14,7 @@ pipeline {
                 script {
                 app=docker.build("muddana/node-app")
                     app.inside {
-                    sh 'echo $(curl http://34.218.59.30:8080)'
+                    sh 'echo $(curl http://34.218.59.30:8081)'
                     }    
                 }    
            }
@@ -23,7 +23,7 @@ pipeline {
           
             steps{
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com','muddana:phone54405'){
+                    docker.withRegistry('https://registry.hub.docker.com','docker_hub_id'){
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
