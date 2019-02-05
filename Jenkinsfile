@@ -8,13 +8,13 @@ pipeline {
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
-        stage ('Build Docker Image'){
+        stage('Build Docker Image'){
             when {
                  branch 'master'
             }
             steps{
                 scripts {
-                app= docker.build("<docker_login_id>/node-app")
+                app= docker.build("muddana/node-app")
                     app.inside {
                     sh 'echo $(curl localhost:8080)'
                     }    
@@ -27,7 +27,7 @@ pipeline {
             }
             steps{
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com','docker_hub_login'){
+                    docker.withRegistry('https://registry.hub.docker.com','muddana:phone54405'){
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
