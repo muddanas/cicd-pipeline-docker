@@ -14,7 +14,7 @@ pipeline {
             }
             steps{
                 scripts {
-                app= docker.build("muddana/node-app")
+                app=docker.build("muddana/node-app")
                     app.inside {
                     sh 'echo $(curl localhost:8080)'
                     }    
